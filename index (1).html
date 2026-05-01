@@ -1,0 +1,2107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Owner Pre-Work · Owner's Summit</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root {
+  --navy: #0d1f36;
+  --navy2: #1a3a5c;
+  --teal: #2ec4b6;
+  --teal-l: #e4f7f5;
+  --teal-d: #1ea99c;
+  --amber: #f4a621;
+  --amber-l: #fef3e2;
+  --gray-l: #f2f5f8;
+  --gray-ll: #f8fafc;
+  --divider: #d4dde8;
+  --mid: #8493a8;
+  --dark: #1a2b40;
+  --danger: #ef4444;
+  --success: #22c55e;
+  --shadow-sm: 0 1px 2px rgba(13, 31, 54, 0.06);
+  --shadow: 0 2px 8px rgba(13, 31, 54, 0.08);
+  --shadow-lg: 0 8px 32px rgba(13, 31, 54, 0.12);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: var(--gray-l);
+  color: var(--dark);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  scroll-behavior: smooth;
+}
+
+/* ---------- Header ---------- */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--navy);
+  color: white;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  padding: 0 32px;
+  box-shadow: var(--shadow);
+}
+
+.header-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.header-eyebrow {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+}
+
+.header-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: white;
+  letter-spacing: 0.2px;
+}
+
+.header-spacer {
+  flex: 1;
+}
+
+.header-progress {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-right: 24px;
+}
+
+.header-progress-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.7);
+  letter-spacing: 0.3px;
+}
+
+.header-progress-track {
+  width: 140px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.header-progress-fill {
+  height: 100%;
+  background: var(--teal);
+  width: 0%;
+  transition: width 0.3s ease;
+  border-radius: 3px;
+}
+
+.header-progress-pct {
+  font-size: 12px;
+  font-weight: 600;
+  color: white;
+  min-width: 32px;
+  text-align: right;
+}
+
+.header-meta {
+  display: flex;
+  gap: 12px;
+  margin-right: 16px;
+}
+
+.header-meta input {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.15s;
+  width: 160px;
+}
+
+.header-meta input::placeholder {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.header-meta input:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.header-meta input[type="date"] {
+  width: 140px;
+  color-scheme: dark;
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  cursor: pointer;
+  border: none;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background: var(--teal);
+  color: var(--navy);
+}
+
+.btn-primary:hover {
+  background: var(--teal-d);
+  transform: translateY(-1px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.btn-icon {
+  width: 14px;
+  height: 14px;
+}
+
+/* ---------- Layout ---------- */
+.layout {
+  display: grid;
+  grid-template-columns: 268px 1fr;
+  min-height: calc(100vh - 72px);
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  background: white;
+  border-right: 1px solid var(--divider);
+  padding: 32px 0;
+  position: sticky;
+  top: 72px;
+  height: calc(100vh - 72px);
+  overflow-y: auto;
+}
+
+.sidebar-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0 32px;
+  margin-bottom: 16px;
+}
+
+.sidebar-nav {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 32px;
+  color: var(--dark);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  border-left: 3px solid transparent;
+  transition: all 0.15s;
+  cursor: pointer;
+}
+
+.sidebar-link:hover {
+  background: var(--gray-l);
+  color: var(--navy);
+}
+
+.sidebar-link.active {
+  background: var(--teal-l);
+  border-left-color: var(--teal);
+  color: var(--navy);
+  font-weight: 600;
+}
+
+.sidebar-link-letter {
+  width: 24px;
+  height: 24px;
+  border-radius: 6px;
+  background: var(--gray-l);
+  color: var(--mid);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.sidebar-link.active .sidebar-link-letter {
+  background: var(--teal);
+  color: white;
+}
+
+.sidebar-link.complete .sidebar-link-letter {
+  background: var(--teal);
+  color: white;
+}
+
+.sidebar-link-text {
+  flex: 1;
+  line-height: 1.3;
+}
+
+.sidebar-link-check {
+  width: 16px;
+  height: 16px;
+  color: var(--teal);
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+
+.sidebar-link.complete .sidebar-link-check {
+  opacity: 1;
+}
+
+.sidebar-divider {
+  height: 1px;
+  background: var(--divider);
+  margin: 16px 32px;
+}
+
+.sidebar-footer {
+  padding: 0 32px;
+  margin-top: 24px;
+}
+
+.sidebar-footer .btn {
+  width: 100%;
+  justify-content: center;
+}
+
+.btn-reset {
+  background: transparent;
+  color: var(--mid);
+  border: 1px solid var(--divider);
+  padding: 8px 16px;
+  font-size: 11px;
+}
+
+.btn-reset:hover {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+/* ---------- Main ---------- */
+.main {
+  padding: 48px 56px 80px;
+  max-width: 920px;
+}
+
+.intro {
+  background: linear-gradient(135deg, var(--navy) 0%, var(--navy2) 100%);
+  color: white;
+  padding: 36px 40px;
+  border-radius: 12px;
+  margin-bottom: 40px;
+  position: relative;
+  overflow: hidden;
+}
+
+.intro::before {
+  content: '';
+  position: absolute;
+  top: -40px;
+  right: -40px;
+  width: 200px;
+  height: 200px;
+  border: 2px solid rgba(46, 196, 182, 0.3);
+  border-radius: 50%;
+}
+
+.intro::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: 60px;
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(244, 166, 33, 0.25);
+  border-radius: 50%;
+}
+
+.intro-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 12px;
+}
+
+.intro-title {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  line-height: 1.15;
+  margin-bottom: 12px;
+}
+
+.intro-sub {
+  font-size: 13px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.75);
+  max-width: 540px;
+  line-height: 1.55;
+  margin-bottom: 24px;
+}
+
+.intro-scales {
+  display: flex;
+  gap: 16px;
+  position: relative;
+  z-index: 1;
+}
+
+.intro-scale {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 8px;
+  padding: 14px 18px;
+}
+
+.intro-scale-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 6px;
+}
+
+.intro-scale-text {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.85);
+  line-height: 1.55;
+}
+
+.intro-scale-text strong {
+  color: white;
+  font-weight: 600;
+}
+
+/* ---------- Section ---------- */
+.section {
+  margin-bottom: 48px;
+  scroll-margin-top: 96px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 2px solid var(--divider);
+}
+
+.section-letter {
+  width: 44px;
+  height: 44px;
+  background: var(--navy);
+  color: white;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.section-title-block {
+  flex: 1;
+}
+
+.section-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 4px;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: -0.2px;
+}
+
+.section-count {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--mid);
+  padding-bottom: 4px;
+}
+
+/* ---------- Question card ---------- */
+.q {
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  padding: 24px 28px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+
+.q:focus-within {
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.12);
+}
+
+.q-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.q-num {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--teal);
+  background: var(--teal-l);
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.q-label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--dark);
+  line-height: 1.45;
+  flex: 1;
+}
+
+.q-help {
+  font-size: 12px;
+  color: var(--mid);
+  margin-top: 4px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+/* ---------- Inputs ---------- */
+input[type="text"],
+textarea,
+select {
+  font-family: inherit;
+  font-size: 13px;
+  color: var(--dark);
+  background: var(--gray-ll);
+  border: 1px solid var(--divider);
+  border-radius: 6px;
+  padding: 10px 14px;
+  transition: all 0.15s;
+  width: 100%;
+}
+
+input[type="text"]::placeholder,
+textarea::placeholder {
+  color: var(--mid);
+}
+
+input[type="text"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--teal);
+  background: white;
+  box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.12);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 88px;
+  line-height: 1.55;
+}
+
+select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%238493a8' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 14px center;
+  padding-right: 36px;
+}
+
+/* List input */
+.list-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.list-row-arrow {
+  color: var(--teal);
+  font-weight: 700;
+  font-size: 14px;
+  flex-shrink: 0;
+  width: 16px;
+}
+
+.list-row input {
+  flex: 1;
+}
+
+.list-row-remove {
+  background: transparent;
+  border: 1px solid var(--divider);
+  color: var(--mid);
+  width: 32px;
+  height: 32px;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.list-row-remove:hover {
+  border-color: var(--danger);
+  color: var(--danger);
+}
+
+.list-row-remove svg {
+  width: 14px;
+  height: 14px;
+}
+
+.list-add {
+  background: transparent;
+  border: 1px dashed var(--divider);
+  color: var(--mid);
+  padding: 10px 16px;
+  border-radius: 6px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  align-self: flex-start;
+  transition: all 0.15s;
+  margin-top: 4px;
+}
+
+.list-add:hover {
+  border-color: var(--teal);
+  color: var(--teal);
+  background: var(--teal-l);
+}
+
+/* Pair list */
+.pair-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.pair-list-header {
+  display: grid;
+  grid-template-columns: 1fr 1fr 32px;
+  gap: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: var(--mid);
+  padding: 0 4px;
+}
+
+.pair-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr 32px;
+  gap: 10px;
+  align-items: center;
+}
+
+/* Scale (radio buttons 1-5) */
+.scale {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.scale-option {
+  position: relative;
+  flex: 1;
+  min-width: 100px;
+}
+
+.scale-option input[type="radio"] {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.scale-option label {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 14px 12px;
+  background: var(--gray-ll);
+  border: 1.5px solid var(--divider);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.15s;
+  text-align: center;
+}
+
+.scale-option label:hover {
+  border-color: var(--teal);
+  background: var(--teal-l);
+}
+
+.scale-option input[type="radio"]:checked + label {
+  background: var(--navy);
+  border-color: var(--navy);
+  color: white;
+}
+
+.scale-option input[type="radio"]:focus-visible + label {
+  box-shadow: 0 0 0 3px rgba(46, 196, 182, 0.3);
+}
+
+.scale-option-num {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+}
+
+.scale-option input[type="radio"]:checked + label .scale-option-num {
+  color: var(--teal);
+}
+
+.scale-option-text {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--mid);
+  line-height: 1.3;
+}
+
+.scale-option input[type="radio"]:checked + label .scale-option-text {
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.scale-legend {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10px;
+  font-weight: 600;
+  color: var(--mid);
+  margin-top: 10px;
+  padding: 0 4px;
+  letter-spacing: 0.3px;
+}
+
+.scale-legend-low { color: var(--mid); }
+.scale-legend-high { color: var(--teal-d); }
+
+/* ---------- Final question highlight ---------- */
+.section-final {
+  background: linear-gradient(135deg, var(--teal-l) 0%, white 100%);
+  border: 2px solid var(--teal);
+  border-radius: 12px;
+  padding: 32px 36px;
+  margin-bottom: 32px;
+}
+
+.section-final .section-header {
+  border-bottom: none;
+  margin-bottom: 16px;
+  padding-bottom: 0;
+}
+
+.section-final .section-letter {
+  background: var(--teal);
+  color: white;
+}
+
+.section-final .q {
+  background: white;
+  border: 1px solid var(--teal);
+}
+
+/* ---------- Submit area ---------- */
+.submit-area {
+  background: white;
+  border: 1px solid var(--divider);
+  border-radius: 12px;
+  padding: 32px 36px;
+  text-align: center;
+  margin-top: 24px;
+}
+
+.submit-eyebrow {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--teal);
+  margin-bottom: 8px;
+}
+
+.submit-title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 8px;
+}
+
+.submit-text {
+  font-size: 13px;
+  color: var(--mid);
+  margin-bottom: 20px;
+  line-height: 1.55;
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.submit-area .btn-primary {
+  padding: 14px 28px;
+  font-size: 13px;
+}
+
+/* ---------- Toast ---------- */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  background: var(--navy);
+  color: white;
+  padding: 14px 22px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 500;
+  box-shadow: var(--shadow-lg);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 200;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.25s;
+  pointer-events: none;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.toast-icon {
+  color: var(--teal);
+  width: 18px;
+  height: 18px;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 1024px) {
+  .layout { grid-template-columns: 1fr; }
+  .sidebar {
+    position: static;
+    height: auto;
+    padding: 16px 0;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    overflow-x: auto;
+    padding: 0 16px;
+  }
+  .sidebar-link {
+    border-left: none;
+    border-bottom: 3px solid transparent;
+    white-space: nowrap;
+    padding: 12px 16px;
+  }
+  .sidebar-link.active {
+    border-left: none;
+    border-bottom-color: var(--teal);
+  }
+  .sidebar-link-text {
+    display: none;
+  }
+  .sidebar-eyebrow, .sidebar-divider, .sidebar-footer { display: none; }
+  .main { padding: 24px 20px 60px; }
+  .header { padding: 0 16px; }
+  .header-meta input[type="date"] { display: none; }
+  .header-meta input { width: 120px; }
+  .header-progress { display: none; }
+}
+
+@media (max-width: 640px) {
+  .scale-option { min-width: 60px; }
+  .scale-option-num { font-size: 18px; }
+  .scale-option-text { display: none; }
+  .pair-row, .pair-list-header { grid-template-columns: 1fr; }
+  .pair-list-header { display: none; }
+  .intro-scales { flex-direction: column; }
+  .intro-title { font-size: 22px; }
+  .header-meta input { width: 100px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-brand">
+    <div class="header-eyebrow">Owner's Summit</div>
+    <div class="header-title">Owner Pre-Work</div>
+  </div>
+
+  <div class="header-spacer"></div>
+
+  <div class="header-progress">
+    <div class="header-progress-label">Progress</div>
+    <div class="header-progress-track"><div class="header-progress-fill" id="progressFill"></div></div>
+    <div class="header-progress-pct" id="progressPct">0%</div>
+  </div>
+
+  <div class="header-meta">
+    <input type="text" id="metaName" placeholder="Your name" autocomplete="name">
+    <input type="date" id="metaDate">
+  </div>
+
+  <button class="btn btn-primary" onclick="generatePDF()">
+    <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Save as PDF
+  </button>
+</header>
+
+<div class="layout">
+
+  <aside class="sidebar">
+    <div class="sidebar-eyebrow">Sections</div>
+    <nav class="sidebar-nav" id="sidebarNav"></nav>
+    <div class="sidebar-divider"></div>
+    <div class="sidebar-footer">
+      <button class="btn btn-reset" onclick="resetForm()">Clear All Responses</button>
+    </div>
+  </aside>
+
+  <main class="main">
+
+    <div class="intro">
+      <div class="intro-eyebrow">Pre-Work · Confidential</div>
+      <h1 class="intro-title">Prepare for the Owner's Summit</h1>
+      <p class="intro-sub">Please complete all sections thoughtfully. Your responses will directly shape the discussion and decisions made during the Owner's Summit. Allow approximately 30 minutes.</p>
+      <div class="intro-scales">
+        <div class="intro-scale">
+          <div class="intro-scale-title">Alignment / Readiness Scale</div>
+          <div class="intro-scale-text"><strong>1</strong> = Not ready / not aligned &nbsp;·&nbsp; <strong>5</strong> = Fully ready / fully aligned</div>
+        </div>
+        <div class="intro-scale">
+          <div class="intro-scale-title">Risk / Concern Scale</div>
+          <div class="intro-scale-text"><strong>1</strong> = Low concern &nbsp;·&nbsp; <strong>5</strong> = Critical concern</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="formContainer"></div>
+
+    <div class="submit-area">
+      <div class="submit-eyebrow">Final Step</div>
+      <h2 class="submit-title">Ready to submit your pre-work?</h2>
+      <p class="submit-text">Click below to download your responses as a PDF. Email the saved file back to complete your submission ahead of the summit.</p>
+      <button class="btn btn-primary" onclick="generatePDF()">
+        <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Save as PDF
+      </button>
+    </div>
+
+  </main>
+</div>
+
+<div class="toast" id="toast">
+  <svg class="toast-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastText">Saved</span>
+</div>
+
+<script>
+/* =========================================================================
+ * DATA SCHEMA
+ * Each question has: id, type, label, plus type-specific fields.
+ * Types: 'textarea', 'list', 'pair-list', 'scale'
+ * ========================================================================= */
+const SCALE_LABELS_READINESS = [
+  { num: 1, text: 'Not ready' },
+  { num: 2, text: 'Limited' },
+  { num: 3, text: 'Functional' },
+  { num: 4, text: 'Strong' },
+  { num: 5, text: 'Fully ready' }
+];
+
+const SCALE_LABELS_CONFIDENCE = [
+  { num: 1, text: 'Very low' },
+  { num: 2, text: 'Low' },
+  { num: 3, text: 'Moderate' },
+  { num: 4, text: 'High' },
+  { num: 5, text: 'Very high' }
+];
+
+const SCALE_LABELS_CONCERN = [
+  { num: 1, text: 'Low' },
+  { num: 2, text: 'Mild' },
+  { num: 3, text: 'Moderate' },
+  { num: 4, text: 'High' },
+  { num: 5, text: 'Critical' }
+];
+
+const SECTIONS = [
+  {
+    id: 'A',
+    title: 'Opportunity Pipeline',
+    questions: [
+      {
+        id: 'q1', num: '01', type: 'list',
+        label: 'List all current opportunities (products, expansion, R&D, automation):',
+        minItems: 3, placeholder: 'e.g., New product line for SMB market'
+      },
+      {
+        id: 'q2', num: '02', type: 'pair-list',
+        label: 'Categorize each opportunity:',
+        minItems: 3,
+        leftLabel: 'Opportunity',
+        rightLabel: 'Status',
+        rightType: 'select',
+        rightOptions: ['Approved', 'Evaluating', 'Idea Stage'],
+        leftPlaceholder: 'Opportunity name'
+      },
+      {
+        id: 'q3', num: '03', type: 'list',
+        label: 'Opportunities expected to move forward (3–6 months):',
+        minItems: 2, placeholder: 'Opportunity expected to launch in 3–6 months'
+      },
+      {
+        id: 'q4', num: '04', type: 'list',
+        label: 'Opportunities expected to move forward (12 months):',
+        minItems: 2, placeholder: 'Opportunity expected to launch within 12 months'
+      },
+      {
+        id: 'q5', num: '05', type: 'textarea',
+        label: 'Highest long-term value opportunity (and why):',
+        placeholder: 'Describe the opportunity and the rationale for why it represents the most value over the long term…'
+      },
+      {
+        id: 'q6', num: '06', type: 'textarea',
+        label: 'Highest risk / strain opportunity (and why):',
+        placeholder: 'Describe the opportunity and the source of risk or strain…'
+      }
+    ]
+  },
+  {
+    id: 'B',
+    title: 'Strategic Alignment',
+    questions: [
+      {
+        id: 'q7', num: '07', type: 'scale',
+        label: 'Alignment Score',
+        help: 'How aligned are the owners overall on direction and priorities?',
+        scaleLabels: SCALE_LABELS_READINESS,
+        scaleType: 'Alignment / Readiness'
+      },
+      {
+        id: 'q8', num: '08', type: 'textarea',
+        label: 'Where are owners most aligned?',
+        placeholder: 'Identify the topics, decisions, or principles where you all see eye-to-eye…'
+      },
+      {
+        id: 'q9', num: '09', type: 'textarea',
+        label: 'Where are owners least aligned?',
+        placeholder: 'Identify points of friction, divergence, or unresolved disagreement…'
+      },
+      {
+        id: 'q10', num: '10', type: 'textarea',
+        label: 'What must be clarified before committing more resources?',
+        placeholder: 'List the open questions, unknowns, or decisions that need resolution first…'
+      },
+      {
+        id: 'q11', num: '11', type: 'textarea',
+        label: 'What should be paused, delayed, or reevaluated?',
+        placeholder: 'Identify any active initiatives that may need to be slowed down or revisited…'
+      }
+    ]
+  },
+  {
+    id: 'C',
+    title: 'CapEx (2026)',
+    questions: [
+      {
+        id: 'q12', num: '12', type: 'list',
+        label: 'Expected CapEx needs for 2026:',
+        minItems: 2, placeholder: 'e.g., New CNC machine — $250K'
+      },
+      {
+        id: 'q13', num: '13', type: 'pair-list',
+        label: 'Business case tied to each CapEx item:',
+        minItems: 2,
+        leftLabel: 'CapEx Item',
+        rightLabel: 'Business Case',
+        rightType: 'text',
+        leftPlaceholder: 'Item',
+        rightPlaceholder: 'Why this is needed and what it returns'
+      },
+      {
+        id: 'q14', num: '14', type: 'scale',
+        label: 'Confidence in CapEx decisions',
+        help: 'How confident are you in the accuracy and timing of the planned CapEx?',
+        scaleLabels: SCALE_LABELS_CONFIDENCE,
+        scaleType: 'Confidence'
+      },
+      {
+        id: 'q15', num: '15', type: 'textarea',
+        label: 'What is missing before approving more CapEx?',
+        placeholder: 'Data, analysis, vendor quotes, validation, or alignment that needs to happen first…'
+      },
+      {
+        id: 'q16', num: '16', type: 'textarea',
+        label: 'Risk of premature spending:',
+        placeholder: 'Describe the downside if CapEx commitments are made too early…'
+      }
+    ]
+  },
+  {
+    id: 'D',
+    title: 'Organizational Impact',
+    questions: [
+      {
+        id: 'q17', num: '17', type: 'textarea',
+        label: 'Impact on Mike:',
+        placeholder: 'How will the planned activity affect Mike\u2019s capacity, role, or focus?'
+      },
+      {
+        id: 'q18', num: '18', type: 'textarea',
+        label: 'Impact on employees:',
+        placeholder: 'How will this affect the broader team \u2014 workload, morale, skill demands?'
+      },
+      {
+        id: 'q19', num: '19', type: 'textarea',
+        label: 'What breaks first if too much is pushed forward?',
+        placeholder: 'The function, process, or person most likely to fail under increased load…'
+      },
+      {
+        id: 'q20', num: '20', type: 'scale',
+        label: 'Concern level on overloading team',
+        help: 'How worried are you that the team is being asked to absorb too much?',
+        scaleLabels: SCALE_LABELS_CONCERN,
+        scaleType: 'Risk / Concern'
+      },
+      {
+        id: 'q21', num: '21', type: 'textarea',
+        label: 'What support / resources are needed before execution?',
+        placeholder: 'Hiring, tools, training, outside help, restructuring, etc…'
+      }
+    ]
+  },
+  {
+    id: 'F',
+    title: 'Final Question',
+    isFinal: true,
+    questions: [
+      {
+        id: 'qF', num: '★', type: 'textarea',
+        label: 'If you could fix one issue immediately to improve execution, what would it be?',
+        placeholder: 'Be specific — what is the single highest-leverage change?'
+      }
+    ]
+  }
+];
+
+/* =========================================================================
+ * STATE
+ * ========================================================================= */
+const STORAGE_KEY = 'ownerPrework_v1';
+let state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) return JSON.parse(raw);
+  } catch (e) {}
+  return { meta: { name: '', date: '' }, answers: {} };
+}
+
+function saveState() {
+  try {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch (e) {}
+}
+
+/* =========================================================================
+ * RENDER
+ * ========================================================================= */
+function render() {
+  renderSidebar();
+  renderForm();
+  hydrate();
+  updateProgress();
+}
+
+function renderSidebar() {
+  const nav = document.getElementById('sidebarNav');
+  nav.innerHTML = SECTIONS.map(s => `
+    <a class="sidebar-link" href="#section-${s.id}" data-section="${s.id}">
+      <span class="sidebar-link-letter">${s.id === 'F' ? '\u2605' : s.id}</span>
+      <span class="sidebar-link-text">${s.title}</span>
+      <svg class="sidebar-link-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </a>
+  `).join('');
+}
+
+function renderForm() {
+  const c = document.getElementById('formContainer');
+  c.innerHTML = SECTIONS.map(s => renderSection(s)).join('');
+}
+
+function renderSection(s) {
+  const cls = s.isFinal ? 'section section-final' : 'section';
+  const totalQ = s.questions.length;
+  return `
+    <div class="${cls}" id="section-${s.id}">
+      <div class="section-header">
+        <div class="section-letter">${s.id === 'F' ? '\u2605' : s.id}</div>
+        <div class="section-title-block">
+          <div class="section-eyebrow">${s.isFinal ? 'Wrap Up' : 'Section ' + s.id}</div>
+          <h2 class="section-title">${s.title}</h2>
+        </div>
+        <div class="section-count">${totalQ} ${totalQ === 1 ? 'question' : 'questions'}</div>
+      </div>
+      ${s.questions.map(q => renderQuestion(q)).join('')}
+    </div>
+  `;
+}
+
+function renderQuestion(q) {
+  const inner = renderInput(q);
+  const help = q.help ? `<div class="q-help">${q.help}</div>` : '';
+  return `
+    <div class="q" data-qid="${q.id}">
+      <div class="q-header">
+        <div class="q-num">${q.num}</div>
+        <div>
+          <div class="q-label">${q.label}</div>
+          ${help}
+        </div>
+      </div>
+      ${inner}
+    </div>
+  `;
+}
+
+function renderInput(q) {
+  switch (q.type) {
+    case 'textarea':
+      return `<textarea data-input data-qid="${q.id}" placeholder="${escAttr(q.placeholder || '')}" rows="3"></textarea>`;
+    case 'scale':
+      return renderScale(q);
+    case 'list':
+      return renderList(q);
+    case 'pair-list':
+      return renderPairList(q);
+    default:
+      return '';
+  }
+}
+
+function renderScale(q) {
+  const labels = q.scaleLabels;
+  return `
+    <div class="scale" data-input data-qid="${q.id}" role="radiogroup" aria-label="${escAttr(q.label)}">
+      ${labels.map(l => `
+        <div class="scale-option">
+          <input type="radio" name="${q.id}" id="${q.id}_${l.num}" value="${l.num}">
+          <label for="${q.id}_${l.num}">
+            <span class="scale-option-num">${l.num}</span>
+            <span class="scale-option-text">${l.text}</span>
+          </label>
+        </div>
+      `).join('')}
+    </div>
+    <div class="scale-legend">
+      <span class="scale-legend-low">1 — ${labels[0].text}</span>
+      <span class="scale-legend-high">5 — ${labels[4].text}</span>
+    </div>
+  `;
+}
+
+function renderList(q) {
+  const min = q.minItems || 2;
+  return `
+    <div class="list-input" data-input data-qid="${q.id}" data-type="list" data-min="${min}" data-placeholder="${escAttr(q.placeholder || '')}"></div>
+    <button type="button" class="list-add" data-add-list="${q.id}">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add another
+    </button>
+  `;
+}
+
+function renderPairList(q) {
+  const min = q.minItems || 2;
+  return `
+    <div class="pair-list" data-input data-qid="${q.id}" data-type="pair-list" data-min="${min}"
+         data-left-placeholder="${escAttr(q.leftPlaceholder || '')}"
+         data-right-placeholder="${escAttr(q.rightPlaceholder || '')}"
+         data-right-type="${q.rightType || 'text'}"
+         data-right-options='${JSON.stringify(q.rightOptions || [])}'>
+      <div class="pair-list-header">
+        <div>${q.leftLabel}</div>
+        <div>${q.rightLabel}</div>
+        <div></div>
+      </div>
+    </div>
+    <button type="button" class="list-add" data-add-pair="${q.id}">
+      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+      Add another
+    </button>
+  `;
+}
+
+function escAttr(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
+}
+
+/* =========================================================================
+ * HYDRATE — fill inputs from state and wire events
+ * ========================================================================= */
+function hydrate() {
+  // Meta fields
+  document.getElementById('metaName').value = state.meta.name || '';
+  document.getElementById('metaDate').value = state.meta.date || todayISO();
+  if (!state.meta.date) {
+    state.meta.date = todayISO();
+    saveState();
+  }
+
+  document.getElementById('metaName').addEventListener('input', e => {
+    state.meta.name = e.target.value;
+    saveState();
+  });
+  document.getElementById('metaDate').addEventListener('input', e => {
+    state.meta.date = e.target.value;
+    saveState();
+  });
+
+  // Each input element
+  document.querySelectorAll('[data-input]').forEach(el => {
+    const qid = el.getAttribute('data-qid');
+    const type = el.getAttribute('data-type');
+
+    if (el.tagName === 'TEXTAREA') {
+      el.value = state.answers[qid] || '';
+      el.addEventListener('input', () => {
+        state.answers[qid] = el.value;
+        saveState();
+        updateProgress();
+      });
+    } else if (el.classList.contains('scale')) {
+      const val = state.answers[qid];
+      if (val) {
+        const radio = el.querySelector(`input[value="${val}"]`);
+        if (radio) radio.checked = true;
+      }
+      el.querySelectorAll('input[type="radio"]').forEach(r => {
+        r.addEventListener('change', () => {
+          state.answers[qid] = r.value;
+          saveState();
+          updateProgress();
+        });
+      });
+    } else if (type === 'list') {
+      const items = state.answers[qid] || [];
+      const min = parseInt(el.getAttribute('data-min'));
+      const placeholder = el.getAttribute('data-placeholder');
+      const initial = items.length >= min ? items : [...items, ...Array(min - items.length).fill('')];
+      initial.forEach((val, idx) => addListRow(el, val, placeholder));
+      // No items at all
+      if (initial.length === 0) {
+        for (let i = 0; i < min; i++) addListRow(el, '', placeholder);
+      }
+    } else if (type === 'pair-list') {
+      const items = state.answers[qid] || [];
+      const min = parseInt(el.getAttribute('data-min'));
+      const leftP = el.getAttribute('data-left-placeholder');
+      const rightP = el.getAttribute('data-right-placeholder');
+      const rightType = el.getAttribute('data-right-type');
+      const rightOptions = JSON.parse(el.getAttribute('data-right-options'));
+      const initial = items.length >= min ? items : [...items, ...Array(min - items.length).fill({ left: '', right: '' })];
+      initial.forEach(val => addPairRow(el, val, leftP, rightP, rightType, rightOptions));
+      if (initial.length === 0) {
+        for (let i = 0; i < min; i++) addPairRow(el, { left: '', right: '' }, leftP, rightP, rightType, rightOptions);
+      }
+    }
+  });
+
+  // Add buttons
+  document.querySelectorAll('[data-add-list]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qid = btn.getAttribute('data-add-list');
+      const container = document.querySelector(`[data-qid="${qid}"][data-type="list"]`);
+      addListRow(container, '', container.getAttribute('data-placeholder'));
+      syncList(qid);
+    });
+  });
+  document.querySelectorAll('[data-add-pair]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const qid = btn.getAttribute('data-add-pair');
+      const container = document.querySelector(`[data-qid="${qid}"][data-type="pair-list"]`);
+      addPairRow(
+        container,
+        { left: '', right: '' },
+        container.getAttribute('data-left-placeholder'),
+        container.getAttribute('data-right-placeholder'),
+        container.getAttribute('data-right-type'),
+        JSON.parse(container.getAttribute('data-right-options'))
+      );
+      syncPairList(qid);
+    });
+  });
+
+  // Sidebar nav active tracking
+  setupScrollSpy();
+}
+
+function todayISO() {
+  const d = new Date();
+  return d.toISOString().slice(0, 10);
+}
+
+function addListRow(container, val, placeholder) {
+  const row = document.createElement('div');
+  row.className = 'list-row';
+  row.innerHTML = `
+    <span class="list-row-arrow">→</span>
+    <input type="text" placeholder="${escAttr(placeholder)}">
+    <button type="button" class="list-row-remove" aria-label="Remove">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  `;
+  const input = row.querySelector('input');
+  input.value = val;
+  const qid = container.getAttribute('data-qid');
+  input.addEventListener('input', () => syncList(qid));
+  row.querySelector('.list-row-remove').addEventListener('click', () => {
+    const min = parseInt(container.getAttribute('data-min'));
+    if (container.querySelectorAll('.list-row').length <= 1) {
+      input.value = '';
+      syncList(qid);
+      return;
+    }
+    row.remove();
+    syncList(qid);
+  });
+  container.appendChild(row);
+}
+
+function syncList(qid) {
+  const container = document.querySelector(`[data-qid="${qid}"][data-type="list"]`);
+  const values = Array.from(container.querySelectorAll('input')).map(i => i.value);
+  state.answers[qid] = values;
+  saveState();
+  updateProgress();
+}
+
+function addPairRow(container, val, leftP, rightP, rightType, rightOptions) {
+  const row = document.createElement('div');
+  row.className = 'pair-row';
+  let rightInput;
+  if (rightType === 'select') {
+    const opts = rightOptions.map(o => `<option value="${escAttr(o)}">${o}</option>`).join('');
+    rightInput = `<select><option value="">Select…</option>${opts}</select>`;
+  } else {
+    rightInput = `<input type="text" placeholder="${escAttr(rightP)}" data-side="right">`;
+  }
+  row.innerHTML = `
+    <input type="text" placeholder="${escAttr(leftP)}" data-side="left">
+    ${rightInput}
+    <button type="button" class="list-row-remove" aria-label="Remove">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+  `;
+  const leftEl = row.querySelector('[data-side="left"]');
+  const rightEl = row.querySelector('select, [data-side="right"]');
+  leftEl.value = val.left || '';
+  rightEl.value = val.right || '';
+  const qid = container.getAttribute('data-qid');
+  [leftEl, rightEl].forEach(el => el.addEventListener('input', () => syncPairList(qid)));
+  rightEl.addEventListener('change', () => syncPairList(qid));
+  row.querySelector('.list-row-remove').addEventListener('click', () => {
+    if (container.querySelectorAll('.pair-row').length <= 1) {
+      leftEl.value = ''; rightEl.value = '';
+      syncPairList(qid);
+      return;
+    }
+    row.remove();
+    syncPairList(qid);
+  });
+  container.appendChild(row);
+}
+
+function syncPairList(qid) {
+  const container = document.querySelector(`[data-qid="${qid}"][data-type="pair-list"]`);
+  const rows = Array.from(container.querySelectorAll('.pair-row')).map(r => ({
+    left: r.querySelector('[data-side="left"]').value,
+    right: (r.querySelector('select') || r.querySelector('[data-side="right"]')).value
+  }));
+  state.answers[qid] = rows;
+  saveState();
+  updateProgress();
+}
+
+/* =========================================================================
+ * PROGRESS
+ * ========================================================================= */
+function isAnswered(q) {
+  const a = state.answers[q.id];
+  if (a === undefined || a === null || a === '') return false;
+  if (q.type === 'list') {
+    return Array.isArray(a) && a.some(v => v && v.trim());
+  }
+  if (q.type === 'pair-list') {
+    return Array.isArray(a) && a.some(v => (v.left && v.left.trim()) || (v.right && v.right.trim()));
+  }
+  if (q.type === 'scale') return !!a;
+  if (q.type === 'textarea') return !!a.trim();
+  return false;
+}
+
+function updateProgress() {
+  const allQ = SECTIONS.flatMap(s => s.questions);
+  const answered = allQ.filter(isAnswered).length;
+  const pct = Math.round((answered / allQ.length) * 100);
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressPct').textContent = pct + '%';
+
+  // Section completion
+  SECTIONS.forEach(s => {
+    const all = s.questions.every(isAnswered);
+    const link = document.querySelector(`.sidebar-link[data-section="${s.id}"]`);
+    if (link) link.classList.toggle('complete', all);
+  });
+}
+
+function setupScrollSpy() {
+  const links = document.querySelectorAll('.sidebar-link');
+  const sections = SECTIONS.map(s => document.getElementById('section-' + s.id));
+
+  function onScroll() {
+    const offset = 120;
+    let activeId = SECTIONS[0].id;
+    for (let i = 0; i < sections.length; i++) {
+      const rect = sections[i].getBoundingClientRect();
+      if (rect.top - offset <= 0) activeId = SECTIONS[i].id;
+    }
+    links.forEach(l => l.classList.toggle('active', l.getAttribute('data-section') === activeId));
+  }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+}
+
+/* =========================================================================
+ * RESET
+ * ========================================================================= */
+function resetForm() {
+  if (!confirm('Clear all responses? This cannot be undone.')) return;
+  state = { meta: { name: '', date: todayISO() }, answers: {} };
+  saveState();
+  render();
+  showToast('All responses cleared');
+}
+
+/* =========================================================================
+ * TOAST
+ * ========================================================================= */
+let toastTimer;
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  document.getElementById('toastText').textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2400);
+}
+
+/* =========================================================================
+ * PDF GENERATION
+ * Uses jsPDF. Letter portrait, Helvetica (jsPDF default).
+ * Pando palette via RGB triples. Smart page-breaks per question.
+ * ========================================================================= */
+function generatePDF() {
+  if (!window.jspdf) {
+    alert('PDF library failed to load. Please refresh the page and try again.');
+    return;
+  }
+  const { jsPDF } = window.jspdf;
+  const doc = new jsPDF({ unit: 'pt', format: 'letter' });
+
+  // Pando colors as RGB
+  const C = {
+    navy:   [13, 31, 54],
+    navy2:  [26, 58, 92],
+    teal:   [46, 196, 182],
+    tealL:  [228, 247, 245],
+    amber:  [244, 166, 33],
+    grayL:  [242, 245, 248],
+    divider:[212, 221, 232],
+    mid:    [132, 147, 168],
+    dark:   [26, 43, 64],
+    white:  [255, 255, 255]
+  };
+
+  const PW = doc.internal.pageSize.getWidth();   // 612
+  const PH = doc.internal.pageSize.getHeight();  // 792
+  const ML = 56;                                  // left margin
+  const MR = 56;                                  // right margin
+  const CW = PW - ML - MR;                        // content width
+  const TOP_BAR = 56;
+  const BOTTOM_FOOT = 36;
+  const CONTENT_TOP = TOP_BAR + 32;
+  const CONTENT_BOTTOM = PH - BOTTOM_FOOT - 16;
+
+  let pageNum = 0;
+
+  function safeText(s) {
+    if (s === undefined || s === null) return '';
+    return String(s)
+      .replace(/[\u2014\u2013]/g, '-')   // em/en dash
+      .replace(/[\u2018\u2019]/g, "'")   // smart single quote
+      .replace(/[\u201C\u201D]/g, '"')   // smart double quote
+      .replace(/\u2026/g, '...')         // ellipsis
+      .replace(/\u2192/g, '->')          // arrow
+      .replace(/\u2605/g, '*')           // star
+      .replace(/[\u00A0]/g, ' ')         // nbsp
+      .replace(/[^\x00-\x7F]/g, '?');
+  }
+
+  function setFill(rgb) { doc.setFillColor(rgb[0], rgb[1], rgb[2]); }
+  function setStroke(rgb) { doc.setDrawColor(rgb[0], rgb[1], rgb[2]); }
+  function setText(rgb) { doc.setTextColor(rgb[0], rgb[1], rgb[2]); }
+
+  function drawHeaderBar() {
+    setFill(C.navy);
+    doc.rect(0, 0, PW, TOP_BAR, 'F');
+    // Brand
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    setText(C.teal);
+    doc.text("OWNER'S SUMMIT", ML, 24);
+    doc.setFontSize(11);
+    setText(C.white);
+    doc.text('Owner Pre-Work', ML, 40);
+    // Right tag
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    setText(C.teal);
+    const tag = 'Confidential · Pre-Read';
+    doc.text(tag, PW - MR, 32, { align: 'right' });
+  }
+
+  function drawFooter(num) {
+    setStroke(C.divider);
+    doc.setLineWidth(0.5);
+    doc.line(ML, PH - BOTTOM_FOOT, PW - MR, PH - BOTTOM_FOOT);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    setText(C.mid);
+    const name = state.meta.name ? safeText(state.meta.name) + ' · ' : '';
+    const date = state.meta.date ? formatDate(state.meta.date) : '';
+    doc.text(name + date, ML, PH - BOTTOM_FOOT + 14);
+    doc.text('Page ' + num, PW - MR, PH - BOTTOM_FOOT + 14, { align: 'right' });
+  }
+
+  function newPage() {
+    if (pageNum > 0) doc.addPage();
+    pageNum++;
+    drawHeaderBar();
+    drawFooter(pageNum);
+    return CONTENT_TOP;
+  }
+
+  function ensureSpace(y, needed) {
+    if (y + needed > CONTENT_BOTTOM) {
+      return newPage();
+    }
+    return y;
+  }
+
+  function formatDate(iso) {
+    if (!iso) return '';
+    const [y, m, d] = iso.split('-');
+    if (!y || !m || !d) return iso;
+    const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+    return months[parseInt(m) - 1] + ' ' + parseInt(d) + ', ' + y;
+  }
+
+  // ============ COVER PAGE ============
+  pageNum = 1;
+  setFill(C.navy);
+  doc.rect(0, 0, PW, PH, 'F');
+
+  // Decorative arcs (Pando style)
+  setStroke(C.teal);
+  doc.setLineWidth(2);
+  doc.circle(PW - 60, 80, 100, 'S');
+  setStroke(C.amber);
+  doc.setLineWidth(1.5);
+  doc.circle(PW - 100, 140, 60, 'S');
+  setStroke(C.teal);
+  doc.setLineWidth(1);
+  doc.circle(60, PH - 100, 80, 'S');
+
+  // Eyebrow
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10);
+  setText(C.teal);
+  doc.text("OWNER'S SUMMIT  ·  PRE-WORK", ML, PH * 0.42);
+
+  // Title
+  doc.setFontSize(36);
+  setText(C.white);
+  doc.text('Owner Pre-Work', ML, PH * 0.42 + 36);
+  doc.text('Submission', ML, PH * 0.42 + 72);
+
+  // Divider
+  setStroke([30, 63, 96]); // COVER_DIV
+  doc.setLineWidth(1);
+  doc.line(ML, PH * 0.42 + 100, ML + 240, PH * 0.42 + 100);
+
+  // Subtitle: name
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(13);
+  setText([138, 172, 204]); // COVER_SUB
+  const name = state.meta.name ? safeText(state.meta.name) : 'Submitted by: ___________________';
+  doc.text(name, ML, PH * 0.42 + 124);
+
+  // Date / meta
+  doc.setFontSize(10);
+  setText([106, 138, 170]); // COVER_META
+  const date = state.meta.date ? formatDate(state.meta.date) : formatDate(todayISO());
+  doc.text(date + '  ·  Prepared for the Owner\'s Summit', ML, PH * 0.42 + 144);
+
+  // Bottom-left brand
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  setText(C.teal);
+  doc.text('PANDO  CONSULTING  GROUP', ML, PH - 56);
+
+  // ============ INTRO / INSTRUCTIONS PAGE ============
+  let y = newPage();
+
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(18);
+  setText(C.dark);
+  doc.text('Instructions & Scoring Scales', ML, y + 14);
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(9);
+  setText(C.mid);
+  const introLines = doc.splitTextToSize(
+    safeText("This pre-work prepares you for the Owner's Summit. Responses below directly shape the discussion and decisions made during the summit. Please answer thoughtfully — completeness matters more than brevity. Two scoring scales are used in scaled questions:"),
+    CW
+  );
+  doc.text(introLines, ML, y + 36);
+  y += 36 + introLines.length * 12 + 16;
+
+  // Scale legend cards
+  function drawScaleCard(label, low, high, x, w) {
+    setFill(C.grayL);
+    setStroke(C.divider);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(x, y, w, 64, 4, 4, 'FD');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    setText(C.teal);
+    doc.text(label.toUpperCase(), x + 14, y + 18);
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(9);
+    setText(C.dark);
+    doc.text('1 = ' + low, x + 14, y + 36);
+    doc.text('5 = ' + high, x + 14, y + 50);
+  }
+  const cardW = (CW - 16) / 2;
+  drawScaleCard('Alignment / Readiness', 'Not ready / not aligned', 'Fully ready / fully aligned', ML, cardW);
+  drawScaleCard('Risk / Concern', 'Low concern', 'Critical concern', ML + cardW + 16, cardW);
+  y += 64 + 24;
+
+  // Section index
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(11);
+  setText(C.dark);
+  doc.text('Sections', ML, y + 14);
+  y += 24;
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  SECTIONS.forEach(s => {
+    setFill(C.navy);
+    doc.roundedRect(ML, y, 22, 22, 3, 3, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    setText(C.white);
+    doc.text(s.id === 'F' ? '*' : s.id, ML + 11, y + 15, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(11);
+    setText(C.dark);
+    doc.text(safeText(s.title), ML + 34, y + 15);
+    setText(C.mid);
+    doc.setFontSize(9);
+    doc.text(s.questions.length + ' ' + (s.questions.length === 1 ? 'question' : 'questions'),
+             PW - MR, y + 15, { align: 'right' });
+    y += 30;
+  });
+
+  // ============ ANSWER PAGES ============
+  SECTIONS.forEach(s => {
+    y = newPage();
+
+    // Section pill header
+    setFill(C.navy);
+    doc.roundedRect(ML, y, CW, 36, 6, 6, 'F');
+    setFill(C.teal);
+    doc.roundedRect(ML, y, 36, 36, 6, 6, 'F');
+    // Cover the right corners of the inner pill so it doesn't peek
+    setFill(C.teal);
+    doc.rect(ML + 18, y, 18, 36, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(15);
+    setText(C.white);
+    doc.text(s.id === 'F' ? '*' : s.id, ML + 18, y + 23, { align: 'center' });
+    doc.setFontSize(8);
+    setText(C.teal);
+    doc.text(s.isFinal ? 'WRAP UP' : 'SECTION ' + s.id, ML + 50, y + 14);
+    doc.setFontSize(13);
+    setText(C.white);
+    doc.text(safeText(s.title), ML + 50, y + 28);
+    y += 36 + 18;
+
+    // Questions
+    s.questions.forEach((q, idx) => {
+      y = drawQuestion(doc, q, y, ML, CW, C, safeText, ensureSpace);
+      y += 12;
+    });
+  });
+
+  // Save
+  const fname = buildFilename();
+  doc.save(fname);
+  showToast('PDF saved · ' + fname);
+}
+
+function buildFilename() {
+  const name = (state.meta.name || 'response').trim().replace(/[^a-zA-Z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+  const date = state.meta.date || todayISO();
+  return `Owner_Prework_${name || 'response'}_${date}.pdf`;
+}
+
+function drawQuestion(doc, q, y, ML, CW, C, safeText, ensureSpace) {
+  const setFill = rgb => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const setStroke = rgb => doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  const setText = rgb => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  // Pre-measure the label so we know how tall the header is
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  const labelLines = doc.splitTextToSize(safeText(q.label), CW - 56);
+  const headerH = 8 + labelLines.length * 13 + 6;
+
+  // Estimate the total block height for the smart break
+  let estBody = 30;
+  if (q.type === 'textarea') estBody = 56;
+  else if (q.type === 'scale') estBody = 70;
+  else if (q.type === 'list') {
+    const arr = state.answers[q.id] || [];
+    estBody = Math.max(30, arr.length * 18 + 12);
+  } else if (q.type === 'pair-list') {
+    const arr = state.answers[q.id] || [];
+    estBody = Math.max(40, arr.length * 22 + 18);
+  }
+  y = ensureSpace(y, headerH + estBody + 12);
+
+  // Question card
+  const cardTop = y;
+  const cardLeft = ML;
+  const cardW = CW;
+
+  // Question number badge
+  setFill(C.tealL);
+  doc.roundedRect(cardLeft, y, 38, 22, 4, 4, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  setText(C.teal);
+  doc.text(safeText(q.num), cardLeft + 19, y + 15, { align: 'center' });
+
+  // Label
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(10.5);
+  setText(C.dark);
+  doc.text(labelLines, cardLeft + 48, y + 15);
+  let cursor = y + Math.max(22, labelLines.length * 13) + 8;
+
+  // Help line if present
+  if (q.help) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8.5);
+    setText(C.mid);
+    const helpLines = doc.splitTextToSize(safeText(q.help), CW - 48);
+    doc.text(helpLines, cardLeft + 48, cursor);
+    cursor += helpLines.length * 11 + 4;
+  }
+  cursor += 4;
+
+  // Render answer based on type
+  const ans = state.answers[q.id];
+
+  if (q.type === 'textarea') {
+    cursor = drawTextAnswer(doc, ans, cursor, cardLeft, cardW, C, safeText, ensureSpace);
+  } else if (q.type === 'scale') {
+    cursor = drawScaleAnswer(doc, q, ans, cursor, cardLeft, cardW, C, safeText);
+  } else if (q.type === 'list') {
+    cursor = drawListAnswer(doc, ans, cursor, cardLeft, cardW, C, safeText, ensureSpace);
+  } else if (q.type === 'pair-list') {
+    cursor = drawPairAnswer(doc, q, ans, cursor, cardLeft, cardW, C, safeText, ensureSpace);
+  }
+
+  // Bottom rule
+  cursor += 8;
+  setStroke(C.divider);
+  doc.setLineWidth(0.5);
+  doc.line(cardLeft, cursor, cardLeft + cardW, cursor);
+
+  return cursor;
+}
+
+function drawTextAnswer(doc, ans, y, x, w, C, safeText, ensureSpace) {
+  const setFill = rgb => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const setStroke = rgb => doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  const setText = rgb => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  const text = ans && ans.trim() ? safeText(ans) : null;
+
+  if (text) {
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(10);
+    const lines = doc.splitTextToSize(text, w - 24);
+    const boxH = lines.length * 13 + 16;
+    y = ensureSpace(y, boxH);
+    setFill(C.grayL);
+    setStroke(C.divider);
+    doc.setLineWidth(0.5);
+    doc.roundedRect(x, y, w, boxH, 4, 4, 'FD');
+    setText(C.dark);
+    doc.text(lines, x + 12, y + 16);
+    return y + boxH;
+  } else {
+    // Empty placeholder line
+    setStroke(C.divider);
+    doc.setLineDashPattern([2, 2], 0);
+    doc.setLineWidth(0.5);
+    doc.line(x, y + 14, x + w, y + 14);
+    doc.line(x, y + 28, x + w, y + 28);
+    doc.setLineDashPattern([], 0);
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    setText(C.mid);
+    doc.text('— No response provided —', x + w / 2, y + 14, { align: 'center' });
+    return y + 36;
+  }
+}
+
+function drawScaleAnswer(doc, q, ans, y, x, w, C, safeText) {
+  const setFill = rgb => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const setStroke = rgb => doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  const setText = rgb => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  const sel = ans ? parseInt(ans) : null;
+  const labels = q.scaleLabels;
+  const cellW = (w - 4 * 8) / 5;
+  const cellH = 44;
+
+  for (let i = 0; i < 5; i++) {
+    const cx = x + i * (cellW + 8);
+    const isOn = sel === labels[i].num;
+    setFill(isOn ? C.navy : C.grayL);
+    setStroke(isOn ? C.navy : C.divider);
+    doc.setLineWidth(isOn ? 1.2 : 0.5);
+    doc.roundedRect(cx, y, cellW, cellH, 5, 5, 'FD');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(16);
+    setText(isOn ? C.teal : C.navy);
+    doc.text(String(labels[i].num), cx + cellW / 2, y + 22, { align: 'center' });
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(7.5);
+    setText(isOn ? C.white : C.mid);
+    doc.text(safeText(labels[i].text), cx + cellW / 2, y + 35, { align: 'center' });
+  }
+
+  // Selected score readout
+  let after = y + cellH + 10;
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(9);
+  if (sel) {
+    setText(C.teal);
+    doc.text('Selected: ' + sel + ' / 5  —  ' + safeText(labels[sel - 1].text), x, after);
+  } else {
+    setText(C.mid);
+    doc.setFont('helvetica', 'italic');
+    doc.text('No score selected', x, after);
+  }
+  return after + 4;
+}
+
+function drawListAnswer(doc, ans, y, x, w, C, safeText, ensureSpace) {
+  const setFill = rgb => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const setText = rgb => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  const items = (ans || []).filter(v => v && v.trim());
+  if (items.length === 0) {
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    setText(C.mid);
+    doc.text('— No items provided —', x, y + 12);
+    return y + 18;
+  }
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  items.forEach((item, idx) => {
+    const lines = doc.splitTextToSize(safeText(item), w - 28);
+    const rowH = Math.max(16, lines.length * 13 + 4);
+    y = ensureSpace(y, rowH);
+    // Bullet
+    setFill(C.teal);
+    doc.circle(x + 6, y + 7, 2.5, 'F');
+    // Text
+    setText(C.dark);
+    doc.text(lines, x + 18, y + 10);
+    y += rowH;
+  });
+  return y;
+}
+
+function drawPairAnswer(doc, q, ans, y, x, w, C, safeText, ensureSpace) {
+  const setFill = rgb => doc.setFillColor(rgb[0], rgb[1], rgb[2]);
+  const setStroke = rgb => doc.setDrawColor(rgb[0], rgb[1], rgb[2]);
+  const setText = rgb => doc.setTextColor(rgb[0], rgb[1], rgb[2]);
+
+  const items = (ans || []).filter(v => (v.left && v.left.trim()) || (v.right && v.right.trim()));
+  if (items.length === 0) {
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(9);
+    setText(C.mid);
+    doc.text('— No items provided —', x, y + 12);
+    return y + 18;
+  }
+
+  // Table header
+  const colLeftX = x;
+  const colLeftW = w * 0.45;
+  const colRightX = x + colLeftW + 8;
+  const colRightW = w - colLeftW - 8;
+
+  setFill(C.navy);
+  doc.rect(x, y, w, 20, 'F');
+  doc.setFont('helvetica', 'bold');
+  doc.setFontSize(8);
+  setText(C.teal);
+  doc.text(safeText(q.leftLabel.toUpperCase()), colLeftX + 10, y + 13);
+  setText(C.amber);
+  doc.text(safeText(q.rightLabel.toUpperCase()), colRightX + 10, y + 13);
+  y += 20;
+
+  // Rows
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(10);
+  items.forEach((row, idx) => {
+    const leftLines  = doc.splitTextToSize(safeText(row.left  || '—'), colLeftW - 20);
+    const rightLines = doc.splitTextToSize(safeText(row.right || '—'), colRightW - 20);
+    const rowH = Math.max(20, Math.max(leftLines.length, rightLines.length) * 13 + 8);
+    y = ensureSpace(y, rowH);
+    // Alternating bg
+    if (idx % 2 === 1) {
+      setFill(C.grayL);
+      doc.rect(x, y, w, rowH, 'F');
+    }
+    setStroke(C.divider);
+    doc.setLineWidth(0.5);
+    doc.line(x, y + rowH, x + w, y + rowH);
+    setText(C.dark);
+    doc.text(leftLines, colLeftX + 10, y + 14);
+    doc.text(rightLines, colRightX + 10, y + 14);
+    y += rowH;
+  });
+  return y;
+}
+
+/* =========================================================================
+ * BOOT
+ * ========================================================================= */
+render();
+</script>
+
+</body>
+</html>
